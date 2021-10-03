@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
@@ -11,7 +13,10 @@ $this->title = 'My Yii Application';
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p>
+            <a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a>
+            <a class="btn btn-lg btn-primary" href="<?= Url::to(['/post']) ?>">Go to posts</a>
+        </p>
     </div>
 
     <div class="body-content">

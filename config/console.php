@@ -6,7 +6,15 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'filemanager'],
+    'modules' => [
+        'filemanager' => [
+            'class' => 'vatandoost\filemanager\Module',
+            'host' => 'http://localhost:8000',
+            'publicFiles' => '@app/web/uploads',
+            'privateFiles' => '@app/uploads',
+        ]
+    ],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -28,13 +36,18 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => [
+                '@app/migrations', // Common migrations for the whole application
+                '@vendor/vatandoost/filemanager/migrations', // Migrations for the specific project's module
+            ],
+        ],
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {

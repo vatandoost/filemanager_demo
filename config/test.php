@@ -12,6 +12,15 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'bootstrap' => ['filemanager'],
+    'modules' => [
+        'filemanager' => [
+            'class' => 'vatandoost\filemanager\Module',
+            'host' => 'http://localhost:8000',
+            'publicFiles' => '@app/web/uploads',
+            'privateFiles' => '@app/uploads',
+        ]
+    ],
     'language' => 'en-US',
     'components' => [
         'db' => $db,

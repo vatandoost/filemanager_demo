@@ -1,9 +1,39 @@
 version: '2'
 services:
-  php:
-    image: yiisoftware/yii2-php:7.4-apache
+  files-php:
+    container_name: files-php
+    image: yiisoftware/yii2-php:8.0-apache
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./:/app:delegated
+    environment:
+      - COOKIE_VALIDATION_KEY=${COOKIE_VALIDATION_KEY}
     ports:
       - '8000:80'
+  files-mysql:
+    image: mysql:8
+    container_name: files-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - "dbstorage:/data"
+  files-mysql-test:
+    image: mysql:8
+    container_name: files-mysql-test
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  files-adminer:
+    image: adminer
+    container_name: files-adminer
+    restart: always
+    ports:
+      - 8090:8080
+volumes:
+  dbstorage:
+    driver: local

@@ -35,6 +35,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
+            [['title'], 'required'],
             [['background_image_id'], 'integer'],
             [['title', 'files_str'], 'string', 'max' => 255],
             [
